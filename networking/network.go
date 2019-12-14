@@ -33,7 +33,7 @@ func (api *Api) Calculate(w http.ResponseWriter, r *http.Request, _ httprouter.P
 	go computer.CalculateUsingGoRoutines(*api.calculateBody.A, aCh) // spin off a go routine to compute A
 	go computer.CalculateUsingGoRoutines(*api.calculateBody.B, bCh) // spin off a go routine to compute B
 	fA, fB := <-aCh, <-bCh
-	api.response.Product = fA + fB // compute and assign product from channels accordingly
+	api.response.Product = fA * fB // compute and assign product from channels accordingly
 	// then close the channels
 	close(aCh)
 	close(bCh)
